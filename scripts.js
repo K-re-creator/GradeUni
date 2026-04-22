@@ -60,6 +60,7 @@ function calculateRow(row) {
     calculateSummary(); // Update summary after calculating the row
 }
 
+// Function to calculate total weights, total weighted scores, mean grade, and update the display
 function calculateSummary() {
     const rows = document.querySelectorAll("#tableBody tr");
 
@@ -85,4 +86,32 @@ function calculateSummary() {
     }
 
     document.getElementById("meanGrade").textContent = mean.toFixed(2);
+
+    // Determine grade and GPA
+    const { grade, gpa } = getGrade(mean);
+    const classification = getClass(gpa);
+
+    // Display results
+    document.getElementById("meanGrade").textContent = mean.toFixed(2);
+    document.getElementById("finalGrade").textContent = grade;
+    document.getElementById("gpa").textContent = gpa.toFixed(2);
+    document.getElementById("classification").textContent = classification;
+}
+
+// Function to determine grade and GPA based on mean score
+function getGrade(mean) {
+    if (mean >= 70) return { grade: "A", gpa: 4.0 };
+    if (mean >= 60) return { grade: "B", gpa: 3.0 };
+    if (mean >= 50) return { grade: "C", gpa: 2.0 };
+    if (mean >= 40) return { grade: "D", gpa: 1.0 };
+    return { grade: "E", gpa: 0.0 };
+}
+
+// Function to determine class based on GPA
+function getClass(gpa) {
+    if (gpa >= 3.7) return "First Class";
+    if (gpa >= 3.0) return "Second Class Upper";
+    if (gpa >= 2.0) return "Second Class Lower";
+    if (gpa >= 1.0) return "Pass";
+    return "Fail";
 }
