@@ -174,3 +174,20 @@ downloadBtn.addEventListener("click", () => {
 
     doc.save("GradeUni_Transcript.pdf");
 });
+
+// Function to update date and time every second
+function updateDateTime() {
+    const now = new Date();
+
+    const date = now.toLocaleDateString();
+    const time = now.toLocaleTimeString();
+
+    document.getElementById("date").textContent = date;
+    document.getElementById("time").textContent = time;
+}
+
+// run once
+updateDateTime();
+
+// update every second
+setInterval(updateDateTime, 1000);
