@@ -4,8 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GradeUni</title>
+    <link rel ="stylesheet" href="styles.css">
 </head>
 <body>
-   
+
+   <div class="container">
+
+    <h1>GradeUni</h1>
+
+    <div class="datetime">
+        <p>Date: <span id="date"></span></p>
+        <p>Time: <span id="time"></span></p>
+    </div>
+
+    <div class="Student-info">
+        <input type="text" placeholder="First Name">
+        <input type="text" placeholder="Last Name">
+        <input type="text" placeholder="University Name">
+        <input type="text" placeholder="Course name">
+    </div>
+
+    <table id="gradeTable">
+        <thead>
+            <tr>
+                <th>Unit Name</th>
+                <th>CAT 1</th>
+                <th>CAT 2</th>
+                <th>CAT 3</th>
+                <th>Exam</th>
+                <th>Unit Total</th>
+                <th>Unit Weight</th>
+                <th>Weighted Score</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+
+        </tbody>
+    </table>
+
+    <button id="addRow">Add Unit</button>
+
+    <div class="summary">
+        <p>Total Unit Weights: <span id="totalUnits">0</span></p>
+        <p>Total Weighted Score: <span id="totalWeighted">0</span></p>
+        <p>Mean Grade: <span id="meanGrade">0</span></p>
+    </div>
+
+    <button id="download">Download pdf</button>
+   </div>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
