@@ -20,8 +20,40 @@ function addNewRow() {
         <td class="weighted-score">0</td>
     `;
     tableBody.appendChild(row);
+
+    const inputs = row.querySelectorAll("input");
+    inputs.forEach(input => {
+        input.addEventListener("input", () => {
+            calculateRow(row);
+        });
+    });
 }
 
 window.onload = () => {
     addNewRow(); // Add an initial row when the page loads
+}
+
+function calculateRow(row) {
+    const cats = row.querySelectorAll(".cat");
+    const exam = row.querySelector(".exam");
+    const unitWeight = row.querySelector(".unit-weight");
+
+    let total = 0;
+
+    // Sum CATs
+    cats.forEach(cat => {
+        total += Number(cat.value) || 0;
+    });
+
+    // Add exam
+    total += Number(exam.value) || 0;
+
+    // Display Unit Total
+    row.querySelector(".unit-total").textContent = total;
+
+    // Calculate Weighted Score
+    const weight = Number(unitWeight.value) || 0;
+    const weightedScore = total * weight;
+
+    row.querySelector(".weighted-score").textContent = weightedScore;
 }
