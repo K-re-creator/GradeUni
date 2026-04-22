@@ -56,4 +56,33 @@ function calculateRow(row) {
     const weightedScore = total * weight;
 
     row.querySelector(".weighted-score").textContent = weightedScore;
+
+    calculateSummary(); // Update summary after calculating the row
+}
+
+function calculateSummary() {
+    const rows = document.querySelectorAll("#tableBody tr");
+
+    let totalWeights = 0;
+    let totalWeightedScore = 0;
+
+    rows.forEach(row => {
+        const weight = Number(row.querySelector(".unit-weight").value) || 0;
+        const weightedScore = Number(row.querySelector(".weighted-score").textContent) || 0;
+
+        totalWeights += weight;
+        totalWeightedScore += weightedScore;
+    });
+
+    // Display totals
+    document.getElementById("totalUnits").textContent = totalWeights;
+    document.getElementById("totalWeighted").textContent = totalWeightedScore;
+
+    // Calculate mean
+    let mean = 0;
+    if (totalWeights > 0) {
+        mean = totalWeightedScore / totalWeights;
+    }
+
+    document.getElementById("meanGrade").textContent = mean.toFixed(2);
 }
