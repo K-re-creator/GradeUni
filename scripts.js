@@ -11,12 +11,12 @@ function addNewRow() {
     const row = document.createElement("tr");
     row.innerHTML = `
         <td><input type="text" placeholder="Unit Name"></td>
-        <td><input type="number" class="cat"></td>
-        <td><input type="number" class="cat"></td>
-        <td><input type="number" class="cat"></td>
-        <td><input type="number" class="exam"</td>
+        <td><input type="number" class="cat" placeholder="CAT 1"></td>
+        <td><input type="number" class="cat" placeholder="CAT 2"></td>
+        <td><input type="number" class="cat" placeholder="CAT 3"></td>
+        <td><input type="number" class="exam" placeholder="Exam"></td>
         <td class="unit-total">0</td>
-        <td><input type="number" class="unit-weight"></td>
+        <td><input type="number" class="unit-weight" placeholder="Weight">
         <td class="weighted-score">0</td>
     `;
     tableBody.appendChild(row);
@@ -40,13 +40,25 @@ function calculateRow(row) {
 
     let total = 0;
 
-    // Sum CATs
+     // Validate CATs
     cats.forEach(cat => {
-        total += Number(cat.value) || 0;
+        let value = Number(cat.value) || 0;
+
+        if (value < 0) value = 0;
+        if (value > 30) value = 30; // TEMP limit (we'll improve later)
+
+        cat.value = value;
+        total += value;
     });
 
-    // Add exam
-    total += Number(exam.value) || 0;
+    // Validate Exam
+    let examValue = Number(exam.value) || 0;
+
+    if (examValue < 0) examValue = 0;
+    if (examValue > 70) examValue = 70;
+
+    exam.value = examValue;
+    total += examValue;
 
     // Display Unit Total
     row.querySelector(".unit-total").textContent = total;
@@ -115,3 +127,50 @@ function getClass(gpa) {
     if (gpa >= 1.0) return "Pass";
     return "Fail";
 }
+
+const downloadBtn = document.getElementById("download");
+
+downloadBtn.addEventListener("click", () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Title
+    doc.text("GradeUni Transcript", 20, 20);
+
+    // Student Info
+    const inputs = document.querySelectorAll(".student-info input");
+    let y = 30;
+
+    inputs.forEach(input => {
+        doc.text(input.value || "-", 20, y);
+        y += 10;
+    });
+
+    // Table data (simple version)
+    const rows = document.querySelectorAll("#tableBody tr");
+
+    y += 10;
+    doc.text("Units:", 20, y);
+    y += 10;
+
+    rows.forEach((row, index) => {
+        const unitName = row.querySelector("input[type='text']").value || "Unit";
+        const total = row.querySelector(".unit-total").textContent;
+        const weight = row.querySelector(".unit-weight").value || 0;
+
+        doc.text(`${index + 1}. ${unitName} | Total: ${total} | Weight: ${weight}`, 20, y);
+        y += 10;
+    });
+
+    // Final results
+    y += 10;
+    doc.text(`Mean: ${document.getElementById("meanGrade").textContent}`, 20, y);
+    y += 10;
+    doc.text(`Grade: ${document.getElementById("finalGrade").textContent}`, 20, y);
+    y += 10;
+    doc.text(`GPA: ${document.getElementById("gpa").textContent}`, 20, y);
+    y += 10;
+    doc.text(`Class: ${document.getElementById("classification").textContent}`, 20, y);
+
+    doc.save("GradeUni_Transcript.pdf");
+});
