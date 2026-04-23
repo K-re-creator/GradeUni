@@ -112,3 +112,7 @@ td:first-child{font-weight:500}
     padding:10px;
     font-size:13px;
 }
+@media(max-width:768px){
+    .row{flex-direction:column}
+    .summary{grid-template-columns:repeat(3,1fr)}
+}
