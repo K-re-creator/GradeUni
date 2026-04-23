@@ -96,7 +96,7 @@ td:first-child{font-weight:500}
 .btn-blue{background:var(--primary);color:#fff}
 .btn-red{background:#e74c3c;color:#fff}
 .btn-green{background:#2ecc71;color:#fff}
-.actions{margin-top:12px;display:flex;gap:10px}
+.actions{margin-top:12px;display:flex;gap:10px;min-width: 120px;flex-wrap: wrap;flex: 1;}
 .summary{
     display:grid;
     grid-template-columns:repeat(6,1fr);
@@ -119,5 +119,5 @@ td:first-child{font-weight:500}
 }
 @media(max-width:768px){
     .row{flex-direction:column}
-    .summary{grid-template-columns:repeat(3,1fr)}
+    .summary{grid-template-columns:repeat(2,1fr)}
 }
