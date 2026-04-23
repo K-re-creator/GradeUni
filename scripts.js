@@ -191,3 +191,6 @@ updateDateTime();
 
 // update every second
 setInterval(updateDateTime, 1000);
+
+function clearAll(){document.getElementById('tableBody').innerHTML=''}
+for(let i=0;i<5;i++)addRow();

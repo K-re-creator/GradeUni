@@ -5,57 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GradeUni</title>
     <link rel ="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
+    <div class="header">
+        <div class="title">
+            <div>
+                <h1>GradeUni</h1>
+                <small>University Grade Calculator</small>
+            </div>
+        </div>
+        <div class="datetime">
+            <div>Date: <span id="date"></span></div>
+            <div>Time: <span id="time"></span></div>
+        </div>
+    </div>
+
     <div class="container">
+        <div class="card">
+            <div class="section-title">Student Information</div>
+            <div class="row">
+                <div class="input-group"><input placeholder="Enter student name"></div>
+                <div class="input-group"><input placeholder="Enter university name"></div>
+                <div class="input-group"><input placeholder="Enter course name"></div>
+            </div>
+        </div>
 
-    <h1>GradeUni</h1>
+        <div class="card">
+            <div class="section-title">Units & Scores</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Unit Name</th>
+                        <th>CAT 1</th>
+                        <th>CAT 2</th>
+                        <th>CAT 3</th>
+                        <th>Exam</th>
+                        <th>Unit Total</th>
+                        <th>Unit Weight</th>
+                        <th>Weighted Score</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
 
-    <div class="datetime">
-        <p>Date: <span id="date"></span></p>
-        <p>Time: <span id="time"></span></p>
+            <div class="actions">
+                <button class="btn btn-blue" id="addRow">+Add Unit</button>
+                <button class="btn btn-red" onclick="clearAll()">Clear All</button>
+                <button class="btn btn-green" id="download">Download pdf</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">Summary</div>
+            <div class="summary">
+                <div class="summary-box" style="background:#e3e8ff">Total Unit Weights: <span id="totalUnits">0</span></div>
+                <div class="summary-box" style="background:#eee6ff">Total Weighted Score: <span id="totalWeighted">0</span></div>
+                <div class="summary-box" style="background:#fff4d6">Mean Grade: <span id="meanGrade">0</span></div>
+                <div class="summary-box" style="background:#e3f7e3">Grade: <span id="finalGrade">-</span></div>
+                <div class="summary-box" style="background:#ffe3e3">GPA: <span id="gpa">0</span></div>
+                <div class="summary-box" style="background:#e3f6ff">Classification: <span id="classification">-</span></div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="Student-info">
-        <input type="text" placeholder="First Name">
-        <input type="text" placeholder="Last Name">
-        <input type="text" placeholder="University Name">
-        <input type="text" placeholder="Course name">
-    </div>
-
-    <table id="gradeTable">
-        <thead>
-            <tr>
-                <th>Unit Name</th>
-                <th>CAT 1</th>
-                <th>CAT 2</th>
-                <th>CAT 3</th>
-                <th>Exam</th>
-                <th>Unit Total</th>
-                <th>Unit Weight</th>
-                <th>Weighted Score</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody">
-
-        </tbody>
-    </table>
-
-    <button id="addRow">Add Unit</button>
-
-    <div class="summary">
-        <p>Total Unit Weights: <span id="totalUnits">0</span></p>
-        <p>Total Weighted Score: <span id="totalWeighted">0</span></p>
-        <p>Mean Grade: <span id="meanGrade">0</span></p>
-        <p>Grade: <span id="finalGrade">-</span></p>
-        <p>GPA: <span id="gpa">0</span></p>
-        <p>Classification: <span id="classification">-</span></p>
-    </div>
-
-    <button id="download">Download pdf</button>
-    </div>
+    <div class="footer">GradeUni : Smart grading. Better results. © 2026</div>
 
     <script src="scripts.js"></script>
 </body>
