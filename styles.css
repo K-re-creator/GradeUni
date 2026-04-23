@@ -51,12 +51,17 @@ body{
     border-radius:8px;
     outline:none;
 }
+.table-container{
+    overflow-x:auto;
+    width: 100%;
+}
 table{
     width:100%;
     border-collapse:separate;
     border-spacing:0;
     overflow:hidden;
     border-radius:10px;
+    min-width: 600px;
 }
 th,td{
     padding:8px 6px;
